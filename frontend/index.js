@@ -1,4 +1,4 @@
-var basedUrl = "<URL to your Flask App>";
+var basedUrl = "https://jtzff1er.anyfiddle.run";
 
 function getData() {
   let url = basedUrl + "/api/list";

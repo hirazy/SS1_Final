@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Todo App</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <p class="container">
+            <h2 class="display-3">Create</h2>
+            <form method="POST" action="/add">
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" name="itemDescription" placeholder="Add a new TODO item">
+                    <div class="input-group-append" id="button-addon">
+                        <button class="btn btn-outline-primary" type="submit" value="update">Create new</button>
+                    </div>
+                </div>
+            </form>
+            <h2 class="display-3">List</h2>
+            {% for item in todoList: %}
+                <p>
+                    <form method="POST" action="/edit">
+                        <div class="input-group mb-3">
+                            <input type="hidden" name="itemID" value="{{item['id']}}">
+                                {% if item['status'] == "Done": %}
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="itemStatus" checked disabled>
+                                        </div>
+                                    </div>
+                                        <input class="form-control" type="text" name="itemDescription"
+                                            value="{{item['description']}}" readonly>
+                                    <div class="input-group-append" id="button-addon2">
+                                        <button class="btn btn-outline-secondary" type="submit" name="clickBtn"
+                                            value="delete">Delete</button>
+                                    </div>
+                                {% else %}
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <input type="checkbox" name="itemStatus" value="{{item['status']}}">
+                                        </div>
+                                    </div>
+                                        <input class="form-control" type="text" name="itemDescription"
+                                            value="{{item['description']}}">
+                                    <div class="input-group-append" id="button-addon2">
+                                        <button class="btn btn-outline-secondary" type="submit" name="clickBtn"
+                                            value="update">Update</button>
+                                        <button class="btn btn-outline-secondary" type="submit" name="clickBtn"
+                                            value="delete">Delete</button>
+                                    </div>
+                                        {% endif %}
+                                </div>
+                        </form>
+                </p>
+            {% endfor %}
+        </div>
+    </body>
+</html>
